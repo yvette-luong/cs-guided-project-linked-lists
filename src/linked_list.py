@@ -68,7 +68,7 @@ class LinkedList:
 
         while cur is not None:
             if cur.value == value:
-                #print(f'Found it! {prev.value}, {cur.value}')
+                print(f'Found it! {prev.value}, {cur.value}')
                 prev.next = cur.next
                 cur.next = None
                 return
@@ -81,6 +81,8 @@ ll = LinkedList()
 
 ll.insert_at_front(45)
 ll.insert_at_front(88)
-
-
-    
+ll.insert_at_front(24)
+ll.insert_at_front(12)
+print(ll)
+ll.delete_node(88)
+print(ll)
