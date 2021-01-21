@@ -30,13 +30,10 @@ class LinkedListNode():
 
 def delete_node(delete_this_node):
     # Your code here
+    x = LinkedListNode('X')
+    y = LinkedListNode('Y')
+    z = LinkedListNode('Z')
+    x.next = y
+    y.next = z
 
-
-x = LinkedListNode('X')
-y = LinkedListNode('Y')
-z = LinkedListNode('Z')
-
-x.next = y
-y.next = z
-
-delete_node(y)
+    delete_node(y) 
