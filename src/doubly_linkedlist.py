@@ -150,6 +150,73 @@ class DoublyLinkedList:
         self.head = node # reassign head (shifting left) head is now node 
         self.head.prev = None # reassign head.prev to point at None (no nodes before head )
 
+    def move_to_end(self, node):
+        '''
+        Removes the input node from its current spot in the List and inserts it as the new tail node of the List.
+        '''
+        if self.size == 0: # if no items in the list
+            return # then there no node
+        
+        if node is self.tail: # if node is already at end as it is the tail 
+            return # node does not need to be moved 
+        
+        if node is not self.head:
+            # if the node must be in the middle of the list (node is neither head nor tail, list is not empty)
+            node.prev.next = node. next # since node is not head, then gotta deal with deal node. prev
+
+        else: # if node is at the beginning of the list 
+            self.head =  node.next 
+
+        node.next.prev = node.prev # assign the next_node's prev pointer to point at prev_node 
+        self.tail.next = node # point current_tail.next at node 
+        node.prev = self.tail #point node.prev at current_tail
+        node.next = None # assign node.next none as it will be tail( and thus at end of the list)
+        self.tail = node # assign node as tail
+
+    def delete(self, node):
+        '''
+        Deletes the input node from the List, preserving the order of the other elements of the List
+        '''
+
+        if self.size == 0: # if list is empty
+            return None # nothing to detele
+        
+        removed_value = node.value # copy deleted node's value
+
+        if self.size == 1: # if only one item in list
+            self.head = self.tail = None
+            self.size -= 1
+
+        else: # more than one element in the list
+            if self.head is node: # node to delete is head 
+                self.head = node.next # reassign head to be element after head
+
+            elif self.tail is node: # node to delete is tail
+                self.tail = node.prev # reassign tail to be element before tail 
+            
+            else: # node is neither head nor tail, putting it somewhere in the middle 
+                node.prev.next = node.next
+                node.next.prev = node.prev
+            
+            node.next = node.prev = None
+            self.size -= 1
+
+        return removed_value
+    
+    def get_max(self):
+        '''
+        Finds and returns the maximum value of all the nodes in the List
+        '''
+        max_value = self.head.value
+        current_node = self.head 
+        # while the current_node.next is not None: 
+        while current_node.next is not None: 
+            # when current_node = current.tail, this will not iterate
+            current_node = current_node.next
+            # checks if the values is larger than our max value so far 
+            if max_value < current_node.value:
+                max_value = current_node.value
+        return max_value
 
 
     
